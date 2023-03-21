@@ -1,9 +1,12 @@
-/*
-STARTER CODE
+/* STARTER CODE */
+
 body {
   font-size: 18px;
 }
-*/
+
+
+/*
+CAN'T REALLY USE STYLESHEET BECAUSE WE'RE USING BOOTSTRAP STYLING
 
 head {
     font-size: 18pt;
@@ -12,7 +15,6 @@ head {
     text-align: center;
     }
 
-/*
 body {
     font: ;
     font-size: ;
