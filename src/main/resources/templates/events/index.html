@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body>
+<head th:replace="~{fragments :: head}"></head>
+<body class="container">
 
-<header th:replace="fragments :: header"></header>
+<h1>All Events</h1>
 
-<ul>
-    <th:block th:each="event : ${events}">
-        <li th:text="${event}"></li>
-    </th:block>
-</ul>
+<nav th:replace="~{fragments :: navigation}"></nav>
+
+<!--STARTER CODE-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body>-->
+
+<!--<header th:replace="fragments :: header"></header>-->
+
+<p th:unless="${events} and ${events.size()}">No events!</p>
+
+<!--TODO 5: Use fragments to store the address of the new tech hub where all of the programmers are hanging out. Use th:replace in your main template to bring in the address as a third column in your table. You may need to create a new fragments.html.-->
+<table th:replace="fragments :: name-address"></table>
+
+<!--STARTER CODE-->
+<!--<ul>-->
+<!--    <th:block th:each="event : ${events}">-->
+<!--        <li th:text="${event}"></li>-->
+<!--    </th:block>-->
+<!--</ul>-->
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 <!--commented out to make sure code matches starter code for CHAPTER 13 EXERCISES-->
