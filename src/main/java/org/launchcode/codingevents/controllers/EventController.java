@@ -6,24 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+/**
+ * Created by Chris Bay
+ */
 @Controller
 @RequestMapping("events")
 public class EventController {
 
-    // change String object to Event object
-//    private static List<Event> events = new ArrayList<>();
-    // after creating EventData class, we no longer need this List
-
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
-        // remove and update to use EventData class
-        // model.addAttribute("events", events);
         model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
@@ -34,24 +26,10 @@ public class EventController {
         return "events/create";
     }
 
-
-    // refactored during model binding
-//    public String processCreateEventForm(@RequestParam String eventName,
-//                                         // add eventDescription request param
-//                                         @RequestParam String eventDescription) {
-            // pass in new event object that takes a string
-            // remove and update to use EventData class
-            // events.add(new Event(eventName, eventDescription));
-            // this is using the EventData .add method of the same name
-//            EventData.add(new Event(eventName, eventDescription));
-//        return "redirect:/events";
-//  }
-
     @PostMapping("create")
-    // @ModelAttribute annotation - when method is called spring will create the new event for us
     public String processCreateEventForm(@ModelAttribute Event newEvent) {
         EventData.add(newEvent);
-        return "redirect:/events";
+        return "redirect:";
     }
 
     @GetMapping("delete")
@@ -69,17 +47,75 @@ public class EventController {
                 EventData.remove(id);
             }
         }
-        return "redirect:/events";
+
+        return "redirect:";
     }
 
 }
 
-
-
-
-
-
-
+// REMOVE FOR CH 14 EXERCISES STARTER CODE
+//@Controller
+//@RequestMapping("events")
+//public class EventController {
+//
+//    // change String object to Event object
+////    private static List<Event> events = new ArrayList<>();
+//    // after creating EventData class, we no longer need this List
+//
+//    @GetMapping
+//    public String displayAllEvents(Model model) {
+//        model.addAttribute("title", "All Events");
+//        // remove and update to use EventData class
+//        // model.addAttribute("events", events);
+//        model.addAttribute("events", EventData.getAll());
+//        return "events/index";
+//    }
+//
+//    @GetMapping("create")
+//    public String displayCreateEventForm(Model model) {
+//        model.addAttribute("title", "Create Event");
+//        return "events/create";
+//    }
+//
+//
+//    // refactored during model binding
+////    public String processCreateEventForm(@RequestParam String eventName,
+////                                         // add eventDescription request param
+////                                         @RequestParam String eventDescription) {
+//            // pass in new event object that takes a string
+//            // remove and update to use EventData class
+//            // events.add(new Event(eventName, eventDescription));
+//            // this is using the EventData .add method of the same name
+////            EventData.add(new Event(eventName, eventDescription));
+////        return "redirect:/events";
+////  }
+//
+//    @PostMapping("create")
+//    // @ModelAttribute annotation - when method is called spring will create the new event for us
+//    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+//        EventData.add(newEvent);
+//        return "redirect:/events";
+//    }
+//
+//    @GetMapping("delete")
+//    public String displayDeleteEventForm(Model model) {
+//        model.addAttribute("title", "Delete Events");
+//        model.addAttribute("events", EventData.getAll());
+//        return "events/delete";
+//    }
+//
+//    @PostMapping("delete")
+//    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
+//
+//        if (eventIds != null) {
+//            for (int id : eventIds) {
+//                EventData.remove(id);
+//            }
+//        }
+//        return "redirect:/events";
+//    }
+//
+//}
 
 // commented out ch13 to add starter code from ch14
 //// CHAPTER 13 EXERCISES: 13.10.2. Expanding our Events Schedule
