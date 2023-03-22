@@ -1,0 +1,45 @@
+<!--TODO CH14 EXERCISES #3: Create an edit.html view template in resources/templates/events.-->
+
+<!--TODO CH14 EXERCISES #4: Copy the code from create.html into edit.html. -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+
+<!--TODO CH14 EXERCISES #6B: Add th:action="@{/events/edit}" to the form tag.-->
+<form method="post" th:action="@{/events/edit}">
+
+    <!--TODO CH14 EXERCISES #6A: Get the name and description from the event that was passed in via the model and set them as the values of the form fields.-->
+    <div class="form-group">
+        <label>Name
+            <input type="text" th:value="${event.name}" name="name" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input type="text" th:value="${event.description}" name="description" class="form-control">
+        </label>
+    </div>
+
+    <!--TODO EXERCISES #4A: You’ll want to update the text of the submit button to reflect the edit functionality.-->
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-success">
+    </div>
+
+    <!--TODO CH14 EXERCISES #7: Add another input to hold the id of the event being edited. This should be hidden from the user:-->
+    <div class="form-group">
+        <input type="hidden" th:value="${event.id}" name="eventId" />
+    </div>
+
+</form>
+
+</body>
+</html>
+
+
+
+
