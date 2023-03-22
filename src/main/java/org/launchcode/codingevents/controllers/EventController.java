@@ -4,10 +4,7 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,15 +34,41 @@ public class EventController {
         return "events/create";
     }
 
+
+    // refactored during model binding
+//    public String processCreateEventForm(@RequestParam String eventName,
+//                                         // add eventDescription request param
+//                                         @RequestParam String eventDescription) {
+            // pass in new event object that takes a string
+            // remove and update to use EventData class
+            // events.add(new Event(eventName, eventDescription));
+            // this is using the EventData .add method of the same name
+//            EventData.add(new Event(eventName, eventDescription));
+//        return "redirect:/events";
+//  }
+
     @PostMapping("create")
-    public String processCreateEventForm(@RequestParam String eventName,
-                                         // add eventDescription request param
-                                         @RequestParam String eventDescription) {
-        // pass in new event object that takes a string
-        // remove and update to use EventData class
-        // events.add(new Event(eventName, eventDescription));
-        // this is using the EventData .add method of the same name
-        EventData.add(new Event(eventName, eventDescription));
+    // @ModelAttribute annotation - when method is called spring will create the new event for us
+    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+        EventData.add(newEvent);
+        return "redirect:/events";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
+
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
         return "redirect:/events";
     }
 
