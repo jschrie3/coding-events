@@ -1,51 +1,75 @@
 package org.launchcode.codingevents.models;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
+/**
+ * Created by Chris Bay
+ */
 public class Event {
 
-    // create the event name
-    private String name;
-    private String description;
-    // add unique identifier
     private int id;
-    private static int nextId = 1; // start the counter
+    private static int nextId = 1;
 
-    // generate constructor
-    public Event(String name, String description) {
+    // add validation annotation
+    @NotBlank
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
+    private String name;
+
+    // add validation annotation; can be blank
+    @Size(max = 500, message = "Description too long!")
+    private String description;
+
+    // add validation annotation; recognized as an email
+    @Email(message = "Invalid email. Try again.")
+    private String contactEmail;
+
+    public Event(String name, String description, String contactEmail) {
+        // add new fields to constructor
         this.name = name;
         this.description = description;
-        // initialize Id
+        this.contactEmail = contactEmail;
         this.id = nextId;
         nextId++;
     }
 
-    // generate getters and setters
+    // add getters and setters for new fields
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    // just need a getter because we don't want users to be able to set the id
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
     public int getId() {
         return id;
     }
 
-    // create toString method
     @Override
     public String toString() {
-        // we just want it to return name
         return name;
     }
 
-    // generate equals and hash methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

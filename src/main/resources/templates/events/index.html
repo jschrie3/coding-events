@@ -11,22 +11,14 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Contact Email</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
-        <!--test unique id works - refs the getter for the id field-->
         <td th:text="${event.id}"></td>
-        <!--update event to event.name to get the name of the event object-->
         <td th:text="${event.name}"></td>
-        <!--update event to event.description to get the name of the event object-->
         <td th:text="${event.description}"></td>
-
-        <!--TODO CH14 EXERCISES #10: To access event editing, the user will need an edit option in the list of event data.-->
-        <!--TODO CH14 EXERCISES #10A: In resources/templates/events/index.html, add a link in a new table column to edit the event:-->
-        <td>
-            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
-        </td>
-
+        <td th:text="${event.contactEmail}"></td>
     </tr>
 </table>
 
