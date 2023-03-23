@@ -14,8 +14,8 @@ public class Event {
     private int id;
     private static int nextId = 1;
 
-    // add validation annotation
-    @NotBlank
+    // add validation annotation; cannot be blank
+    @NotBlank(message = "Event Name cannot be blank!")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
@@ -23,7 +23,8 @@ public class Event {
     @Size(max = 500, message = "Description too long!")
     private String description;
 
-    // add validation annotation; recognized as an email
+    // add validation annotation; recognized as an email, cannot be blank
+    @NotBlank(message = "Email cannot be blank!")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
@@ -35,6 +36,9 @@ public class Event {
         this.id = nextId;
         nextId++;
     }
+
+    // create no-arg constructor to be used in create template
+    public Event() {}
 
     // add getters and setters for new fields
     public String getName() {
